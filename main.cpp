@@ -10,6 +10,8 @@ int sell_function();
 int buy_function();
 int quit();
 
+int fish[5] = {0,0,0,0,0}, bait = 0; money = 0, exp = 0, level = 0;
+
 int main()
 {
   cout << "Here you are at the fish pond."<< endl;
@@ -38,7 +40,7 @@ int main()
 
 //============= BELOW are all subfunctions ===============//
 
-int get_a_fish(){
+void get_a_fish( int &fish[], int exp ){
 
   srand((unsigned)time(NULL));
   int x;
@@ -46,46 +48,55 @@ int get_a_fish(){
 
   if (x>=1 && x<=10){
     cout << "A Shell!!!" << endl;
-    update_my_fish();//将这个鱼添加到我的背包里，一会儿好卖
-    update_my_experience();//更新经验，增加这种鱼对应的经验值
-    update_my_level();//更新级别
-    update_my_rod();//更新钓竿
+    fish[0]+=1;
+
+//     update_my_fish();//将这个鱼添加到我的背包里，一会儿好卖
+//     update_my_experience();//更新经验，增加这种鱼对应的经验值
+//     update_my_level();//更新级别
+//     update_my_rod();//更新钓竿
   }
 
   if (x>=11 && x<=25){
     cout << "A Puffer Fish!!!" << endl;
-    update_my_fish();//将这个鱼添加到我的背包里，一会儿好卖
-    update_my_experience();//更新经验，增加这种鱼对应的经验值
-    update_my_level();//更新级别
-    update_my_rod();//更新钓竿
+    fish[1]+=1;
+//     update_my_fish();//将这个鱼添加到我的背包里，一会儿好卖
+//     update_my_experience();//更新经验，增加这种鱼对应的经验值
+//     update_my_level();//更新级别
+//     update_my_rod();//更新钓竿
   }
 
   if (x>=26 && x<=45){
     cout << "A Cod!!!" << endl;
-    update_my_fish();//将这个鱼添加到我的背包里，一会儿好卖
-    update_my_experience();//更新经验，增加这种鱼对应的经验值
-    update_my_level();//更新级别
-    update_my_rod();//更新钓竿
+    fish[2]+=1;
+//     update_my_fish();//将这个鱼添加到我的背包里，一会儿好卖
+//     update_my_experience();//更新经验，增加这种鱼对应的经验值
+//     update_my_level();//更新级别
+//     update_my_rod();//更新钓竿
   }
 
   if (x>=46 && x<=70){
     cout << "A Salmon!!!" << endl;
-    update_my_fish();//将这个鱼添加到我的背包里，一会儿好卖
-    update_my_experience();//更新经验，增加这种鱼对应的经验值
-    update_my_level();//更新级别
-    update_my_rod();//更新钓竿
+    fish[3]+=1;
+//     update_my_fish();//将这个鱼添加到我的背包里，一会儿好卖
+//     update_my_experience();//更新经验，增加这种鱼对应的经验值
+//     update_my_level();//更新级别
+//     update_my_rod();//更新钓竿
   }
 
   if (x>=71 && x<=100){
     cout << "An Octopus!!!" << endl;
-    update_my_fish();//将这个鱼添加到我的背包里，一会儿好卖
-    update_my_experience();//更新经验，增加这种鱼对应的经验值
-    update_my_level();//更新级别
-    update_my_rod();//更新钓竿
+    fish[4]+=1;
+//     update_my_fish();//将这个鱼添加到我的背包里，一会儿好卖
+//     update_my_experience();//更新经验，增加这种鱼对应的经验值
+//     update_my_level();//更新级别
+//     update_my_rod();//更新钓竿
   }
-
-  return 0;
+  exp+=10;
+  update_level();
+//   return 0;
 }
+
+
 
 int get_rubbish(){
 
@@ -153,8 +164,8 @@ int fishing_function()
     cin >> input;
   }
 
-  put_down_the_rod();
-  update_my_bait();//更新我的鱼饵数量
+//   put_down_the_rod();
+//   update_my_bait();//更新我的鱼饵数量
 
   while (true)
   {
