@@ -12,6 +12,21 @@ int quit();
 
 int main()
 {
+  int experience, level, rod, money, bait, shell, pufferFish, cod, salmon, octopus;
+
+  char filename[100] = "userFile.txt";
+  ifstream fin;
+  fin.open(filename);
+
+  if (fin.fail()){
+    cout << "Error in file opening!" << endl;
+    exit(1);
+  }
+
+  fin >> experience >> level >> rod >> money >> bait >> shell >> pufferFish >> cod >> salmon >> octopus;
+
+  fin.close();
+
   cout << "Here you are at the fish pond."<< endl;
   cout << "Go fishing: Press 1" << endl;
   cout << "Go to the market (sell fish): Press 2"<< endl;
@@ -32,6 +47,21 @@ int main()
   if (string=="4"){
     quit();
   }
+
+  ofstream fileout(filename.c_str(), ios::out|ios::trunc);
+  fileout.close();
+
+  ofstream fout;
+  fout.open(filename);
+
+  if (fout.fail()){
+    cout << "Error in file opening!" << endl;
+    exit(1);
+  }
+
+  fout << experience << level << rod << money << bait << shell << pufferFish << cod << salmon << octopus;
+
+  fout.close();
 
   return 0;
 }
