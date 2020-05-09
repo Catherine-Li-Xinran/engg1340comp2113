@@ -19,7 +19,7 @@ struct player {
 };
 player p1={};
 
-int fish[5];//, bait, money, exp, level;
+int fish[5];
 int shell, pufferFish, cod, salmon, octopus;
 char filename[100] = "userFile.txt";
 
@@ -46,6 +46,7 @@ int main()
   menu();
 
   ofstream fout;
+
   fout.open(filename);
 
   if (fout.fail()){
@@ -59,7 +60,8 @@ int main()
   return 0;
 }
 
-int menu(){
+//guide user to choose
+int menu(){  
   cout << "Here you are at the fish pond."<< endl;
   cout << "Go fishing: Press 1" << endl;
   cout << "Go to the market (sell fish): Press 2"<< endl;
@@ -96,6 +98,8 @@ int menu(){
 }
 
 //============= BELOW are all subfunctions ===============//
+//whether to level up
+//input:exp; output:string + level
 void levelcheck(player &p1){
   if ((p1.exp/100)>=p1.level) {
     p1.level+=1;
@@ -103,6 +107,7 @@ void levelcheck(player &p1){
   }
 }
 
+//randomly get a fish, output the fish
 void get_a_fish(int (&fish)[5], player &p1){
 
   srand((unsigned)time(NULL));
@@ -138,6 +143,7 @@ void get_a_fish(int (&fish)[5], player &p1){
   delete i;
 }
 
+//randomly get a rubbish, output rubbish
 int get_rubbish(){
 
   srand((unsigned)time(NULL));
@@ -168,6 +174,7 @@ int get_rubbish(){
   return 0;
 }
 
+//determine whether catch sth(fish or rubbish), input level(determine the possibility of catching a thing), output T/F
 bool whether_catch_sth(player p1){
   int precent = 40-p1.level*10;
   int *i = new int;
@@ -182,7 +189,7 @@ bool whether_catch_sth(player p1){
     return false;
 }
 
-
+//determine 1.nothing; 2.rubbish; 3.fish; 4.remind no bait
 int put_down_the_rod(player &p1)
 {
   if (p1.bait <1){
@@ -218,6 +225,7 @@ int put_down_the_rod(player &p1)
   return 0;
 }
 
+//fishing part
 int fishing_function()
 {
 
@@ -256,6 +264,7 @@ int fishing_function()
 }
 
 //============= Above are fishing_function and its subfunctions ===============//
+//print out the fish in my bag
 void print_my_fish(int fish[]){
   cout << "You have:" << endl;
   cout << "Octopus: " << fish[0] << endl;
@@ -266,6 +275,7 @@ void print_my_fish(int fish[]){
 
 }
 
+//sell fish according to user input what he want to sell and the number
 int sell_fish(int (&fish)[5], player &p1)
 {
   print_my_fish(fish);//
@@ -303,6 +313,7 @@ int sell_fish(int (&fish)[5], player &p1)
   return 0;
 }
 
+//the main function of sell fish
 int sell_function()
 {
   cout << "Welcome to our fish shop!" << endl;
@@ -338,6 +349,7 @@ int sell_function()
 }
 
 //============= Above are sell_function and its subfunctions ===============//
+//buy bait according to user input
 int buy_bait(player &p1)
 {
   cout << "You have " << p1.bait << " baits.";
@@ -370,7 +382,7 @@ int buy_bait(player &p1)
 
 }
 
-
+//the main function of buy bait
 int buy_function()
 {
   cout << "Welcome to our bait shop!" << endl;
