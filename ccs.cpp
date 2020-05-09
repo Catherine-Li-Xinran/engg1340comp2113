@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <stdlib.h>
 #include <time.h>
 
@@ -11,10 +12,45 @@ int buy_function();
 int quit();
 int menu();
 
-int fish[5]={0,0,0,0,0}, bait = 0, money = 10000, exp = 0, level = 1;
+int fish[5], bait, money, exp, level;
+int shell, pufferFish, cod, salmon, octopus;
 
 int main(){
+  //file in
+
+  char filename[100] = "userFile.txt";
+  ifstream fin;
+  fin.open(filename);
+
+  if (fin.fail()){
+    cout << "Error in file opening!" << endl;
+    exit(1);
+  }
+
+  fin >> exp >> level >> money >> bait >> shell >> pufferFish >> cod >> salmon >> octopus;
+  fish[0]=shell;
+  fish[1]=pufferFish;
+  fish[2]=cod;
+  fish[3]=salmon;
+  fish[4]=octopus;
+  fin.close();
+
   menu();
+
+  //file out
+
+  ofstream fout;
+  fout.open(filename);
+
+  if (fout.fail()){
+    cout << "Error in file opening!" << endl;
+    exit(1);
+  }
+
+  fout << exp << level << money << bait << shell << pufferFish << cod << salmon << octopus;
+
+  fout.close();
+
   return 0;
 }
 
