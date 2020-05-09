@@ -238,7 +238,7 @@ int put_down_the_rod(int &bait)
   }
 
   int a;
-  a = whether_catch_sth();//根据钓竿的类型确定，返回true（成功钓上），返回false（什么都没有钓上）
+  a = whether_catch_sth(level);//根据钓竿的类型确定，返回true（成功钓上），返回false（什么都没有钓上）
 
   if (a==false){
     cout << "Sorry, you catch nothing...(Fishing can upgrade your fishing rod!)" << endl;
