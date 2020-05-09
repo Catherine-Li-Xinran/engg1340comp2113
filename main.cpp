@@ -11,12 +11,12 @@ int buy_function();
 int quit();
 int menu();
 
-//int fish[5]={0,0,0,0,0}, bait = 0, money = 10000, exp = 0, level = 1;//临时初始值，可删
+int fish[5], bait, money, exp, level;
+int shell, pufferFish, cod, salmon, octopus;
 
 int main()
 {
-  int exp, level, rod, money, bait, 
-  int fish[5];//shell, pufferFish, cod, salmon, octopus;
+  //file in
 
   char filename[100] = "userFile.txt";
   ifstream fin;
@@ -57,9 +57,6 @@ int main()
 //     quit();
 //   }
 
-  ofstream fileout(filename.c_str(), ios::out|ios::trunc);
-  fileout.close();
-
   ofstream fout;
   fout.open(filename);
 
@@ -71,7 +68,6 @@ int main()
   fout << exp << level << money << bait << shell << pufferFish << cod << salmon << octopus;
 
   fout.close();
-
   return 0;
 }
 
