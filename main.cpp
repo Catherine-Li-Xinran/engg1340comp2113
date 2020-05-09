@@ -15,7 +15,7 @@ int menu();
 
 int main()
 {
-  int experience, level, rod, money, bait, 
+  int exp, level, rod, money, bait, 
   int fish[5];//shell, pufferFish, cod, salmon, octopus;
 
   char filename[100] = "userFile.txt";
@@ -27,7 +27,7 @@ int main()
     exit(1);
   }
 
-  fin >> experience >> level >> rod >> money >> bait >> shell >> pufferFish >> cod >> salmon >> octopus;
+  fin >> exp >> level >> money >> bait >> shell >> pufferFish >> cod >> salmon >> octopus;
   fish[0]=shell;
   fish[1]=pufferFish;
   fish[2]=cod;
@@ -68,7 +68,7 @@ int main()
     exit(1);
   }
 
-  fout << experience << level << rod << money << bait << shell << pufferFish << cod << salmon << octopus;
+  fout << exp << level << money << bait << shell << pufferFish << cod << salmon << octopus;
 
   fout.close();
 
