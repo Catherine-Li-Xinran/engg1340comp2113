@@ -90,8 +90,9 @@ int menu(){
 //============= BELOW are all subfunctions ===============//
 void levelcheck(int exp, int &level){
   if ((exp/100)>=level) {
-    cout << "Level up!";
     level+=1;
+    cout << "Level up! Now you are Level " << level << "!" << endl;
+
   }
 }
 
