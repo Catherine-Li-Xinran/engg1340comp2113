@@ -9,7 +9,7 @@ int fishing_function();
 int sell_function();
 int buy_function();
 int quit();
-
+int menu();
 int main()
 {
   int experience, level, rod, money, bait, shell, pufferFish, cod, salmon, octopus;
