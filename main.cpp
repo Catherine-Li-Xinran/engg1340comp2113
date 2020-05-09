@@ -27,12 +27,12 @@ int main()
     exit(1);
   }
 
-  fin >> exp >> level >> money >> bait >> shell >> pufferFish >> cod >> salmon >> octopus;
-  fish[0]=shell;
-  fish[1]=pufferFish;
+  fin >> exp >> level >> money >> bait >> octopus >> salmon >> cod >> pufferFish >> shell;
+  fish[0]=octopus;
+  fish[1]=salmon;
   fish[2]=cod;
-  fish[3]=salmon;
-  fish[4]=octopus;
+  fish[3]=pufferfish;
+  fish[4]=shell;
   fin.close();
   
   menu();//需要分一下，菜单需要重复进入
@@ -120,14 +120,13 @@ void get_a_fish(int (&fish)[5], int &exp, int level){
   srand((unsigned)time(NULL));
   int x;
   x = (rand()%100)+1;
-
   if (x>=1 && x<=10){
-    cout << "A Shell!!!" << endl;
+    cout << "An Octopus!!!" << endl;
     fish[0]+=1;
   }
 
   if (x>=11 && x<=25){
-    cout << "A Puffer Fish!!!" << endl;
+    cout << "A Salmon!!!" << endl;
     fish[1]+=1;
   }
 
@@ -137,12 +136,12 @@ void get_a_fish(int (&fish)[5], int &exp, int level){
   }
 
   if (x>=46 && x<=70){
-    cout << "A Salmon!!!" << endl;
+    cout << "A Puffer Fish!!!" << endl;
     fish[3]+=1;
   }
 
   if (x>=71 && x<=100){
-    cout << "An Octopus!!!" << endl;
+    cout << "A Shell!!!" << endl;
     fish[4]+=1;
   }
   exp+=10;
