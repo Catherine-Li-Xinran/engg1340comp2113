@@ -369,7 +369,7 @@ int sell_function()
     cin >> input_1;
 
     if (input_1=="Y"){
-      sell_fish(fish, monwy);
+      sell_fish(fish, money);
     }
 
     if (input_1=="N"){
