@@ -11,7 +11,7 @@ int buy_function();
 int quit();
 int menu();
 
-struct player {
+struct player {//TO STORE PLAYER'S VALUE
   int money;
   int exp;
   int level;
@@ -35,7 +35,7 @@ int main()
     cout << "Error in file opening!" << endl;
     exit(1);
   }
-  fin >> p1.exp >> p1.level >> p1.money >> p1.bait >> octopus >> salmon >> cod >> pufferFish >> shell;
+  fin >> p1.exp >> p1.level >> p1.money >> p1.bait >> octopus >> salmon >> cod >> pufferFish >> shell;//GET VALUES FROM THE ARCHIVE FILE
   fish[0]=octopus;
   fish[1]=salmon;
   fish[2]=cod;
@@ -49,7 +49,7 @@ int main()
 
   fout.open(filename);
 
-  if (fout.fail()){
+  if (fout.fail()){//IF FAIL
     cout << "Error in file opening!" << endl;
     exit(1);
   }
