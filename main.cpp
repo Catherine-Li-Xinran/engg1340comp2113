@@ -65,7 +65,7 @@ int main()
     exit(1);
   }
 
-  fout << exp << level << money << bait << shell << pufferFish << cod << salmon << octopus;
+  fout << exp << " " << level << " " << money << " " << bait << " " <<shell << " " << pufferFish << " " << cod << " " << salmon << " " << octopus;
 
   fout.close();
   return 0;
