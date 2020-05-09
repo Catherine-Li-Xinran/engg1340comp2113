@@ -489,7 +489,4 @@ int buy_function()
 
 //============= Above are buy_function and its subfunctions ===============//
 
-int quit()//我不太清楚是否需要这样的function或者应该怎么写它。。你看看？
-{
 
-}
