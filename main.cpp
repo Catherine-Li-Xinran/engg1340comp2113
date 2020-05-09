@@ -11,14 +11,23 @@ int buy_function();
 int quit();
 int menu();
 
-int fish[5], bait, money, exp, level;
+struct player {
+  int money;
+  int exp;
+  int level;
+  int bait;
+};
+player p1={};
+
+int fish[5];//, bait, money, exp, level;
 int shell, pufferFish, cod, salmon, octopus;
 char filename[100] = "userFile.txt";
+
 int main()
 {
   //file in
 
-  
+
   ifstream fin;
   fin.open(filename);
 
@@ -26,16 +35,35 @@ int main()
     cout << "Error in file opening!" << endl;
     exit(1);
   }
-
-  fin >> exp >> level >> money >> bait >> octopus >> salmon >> cod >> pufferFish >> shell;
+  fin >> p1.exp >> p1.level >> p1.money >> p1.bait >> octopus >> salmon >> cod >> pufferFish >> shell;
   fish[0]=octopus;
   fish[1]=salmon;
   fish[2]=cod;
   fish[3]=pufferFish;
   fish[4]=shell;
   fin.close();
-  
+
   menu();//需要分一下，菜单需要重复进入
+//   cout << "Here you are at the fish pond."<< endl;
+//   cout << "Go fishing: Press 1" << endl;
+//   cout << "Go to the market (sell fish): Press 2"<< endl;
+//   cout << "Go to the market (buy bait): Press 3"<< endl;
+//   cout << "Exit the game: Press 4"<< endl;
+
+//   string input;
+//   cin >> string;
+//   if (string=="1"){
+//     fishing_function();
+//   }
+//   if (string=="2"){
+//     sell_function();
+//   }
+//   if (string=="3"){
+//     buy_function();
+//   }
+//   if (string=="4"){
+//     quit();
+//   }
 
   ofstream fout;
   fout.open(filename);
@@ -45,7 +73,7 @@ int main()
     exit(1);
   }
 
-  fout << exp << " " << level << " " << money << " " << bait << " " <<shell << " " << pufferFish << " " << cod << " " << salmon << " " << octopus;
+  fout << p1.exp << " " << p1.level << " " << p1.money << " " << p1.bait << " " <<shell << " " << pufferFish << " " << cod << " " << salmon << " " << octopus;
 
   fout.close();
   return 0;
@@ -79,28 +107,28 @@ int menu(){
       exit(1);
     }
 
-    fout << exp << " " << level << " " << money << " " << bait << " " <<shell << " " << pufferFish << " " << cod << " " << salmon << " " << octopus;
+    fout << p1.exp << " " << p1.level << " " << p1.money << " " << p1.bait << " " <<shell << " " << pufferFish << " " << cod << " " << salmon << " " << octopus;
 
     fout.close();
   }
-  
+
   return 0;
 }
 
 //============= BELOW are all subfunctions ===============//
-void levelcheck(int exp, int &level){
-  if ((exp/100)>=level) {
-    level+=1;
-    cout << "Level up! Now you are Level " << level << "!" << endl;
-
+void levelcheck(player &p1){
+  if ((p1.exp/100)>=p1.level) {
+    p1.level+=1;
+    cout << "Level up! Now you are Level " << p1.level << "!" << endl;
   }
 }
 
-void get_a_fish(int (&fish)[5], int &exp, int level){
+void get_a_fish(int (&fish)[5], player &p1){
 
   srand((unsigned)time(NULL));
   int *i = new int;
-  *i = rand()%100+1;
+  *i = (rand()%100)+1;
+
   if (*i>=1 && *i<=10){
     cout << "An Octopus!!!" << endl;
     fish[0]+=1;
@@ -125,16 +153,17 @@ void get_a_fish(int (&fish)[5], int &exp, int level){
     cout << "A Shell!!!" << endl;
     fish[4]+=1;
   }
+  p1.exp+=10;
+  levelcheck(p1);
   delete i;
-  exp+=10;
-  levelcheck(exp, level);
 }
 
 int get_rubbish(){
 
   srand((unsigned)time(NULL));
   int *i = new int;
-  *i = rand()%100+1;
+  *i = (rand()%100)+1;
+
   if (*i>=1 && *i<=10){
     cout << "A Wooden Stick..." << endl;
   }
@@ -155,56 +184,58 @@ int get_rubbish(){
     cout << "Carrion..." << endl;
   }
   delete i;
+
   return 0;
 }
 
-bool whether_catch_sth(int level){
-  int precent = 40-level*10;
+bool whether_catch_sth(player p1){
+  int precent = 40-p1.level*10;
   int *i = new int;
-  *i = rand()%100+1;
+  *i = (rand()%100)+1;
+
   if (*i>=precent){
-    return true;
     delete i;
+    return true;
   }
   else
-    return false;
     delete i;
+    return false;
 }
 
 
-int put_down_the_rod(int &bait)
-{ 
-  if (bait <1){
+
+int put_down_the_rod(player &p1)
+{
+  if (p1.bait <1){
     cout << "Sorry, you don't have enough baits, go to buy one first!" << endl;
     return 0;
   }
   else {
-    bait-=1;
+    p1.bait-=1;
   }
 
-  int a;
-  a = whether_catch_sth(level);//根据钓竿的类型确定，返回true（成功钓上），返回false（什么都没有钓上）
+  bool *a = new bool;
+  *a = whether_catch_sth(p1);//根据钓竿的类型确定，返回true（成功钓上），返回false（什么都没有钓上）
 
-  if (a==false){
+  if (*a==false){
     cout << "Sorry, you catch nothing...(Fishing can upgrade your fishing rod!)" << endl;
   }
 
-  if (a==true){
+  if (*a==true){
     srand((unsigned)time(NULL));
+    int x;
     int *i = new int;
-    *i = rand()%10+1;
-
+    *i = (rand()%10)+1;
     if (*i<=8){
       cout << "Congratulations! ";
-      get_a_fish(fish, exp, level);
+      get_a_fish(fish, p1);
     }
     if (*i>8){
       cout << "Oops..." << endl;
       get_rubbish();
     }
-    delete i;
+    delete i,a;
   }
-
   return 0;
 }
 
@@ -219,7 +250,7 @@ int fishing_function()
     cin >> input;
   }
 
-  put_down_the_rod(bait);
+  put_down_the_rod(p1);
   // update_my_bait();//更新我的鱼饵数量
 
   while (true)
@@ -232,7 +263,7 @@ int fishing_function()
     cin >> input_1;
 
     if (input_1=="Y"){
-      put_down_the_rod(bait);
+      put_down_the_rod(p1);
       //update_my_bait();//更新我的鱼饵数量
     }
 
@@ -256,7 +287,7 @@ void print_my_fish(int fish[]){
 
 }
 
-int sell_fish(int (&fish)[5], int &money)
+int sell_fish(int (&fish)[5], player &p1)
 {
   print_my_fish(fish);//打印出背包里所有的鱼和鱼的数量
   cout << "Please tell me what fish you want to sell and the number:" << endl;
@@ -288,8 +319,8 @@ int sell_fish(int (&fish)[5], int &money)
   }
   if (fish[input1]>=input2){
     fish[input1]=fish[input1]-input2;
-    money=money+input2*price;
-    cout << "You got " << input2*price << ",now you have "<< money <<". " << endl;
+    p1.money=p1.money+input2*price;
+    cout << "You got " << input2*price << ",now you have "<< p1.money <<". " << endl;
   }
   else
   cout << "You don't have enough fish!";
@@ -306,7 +337,7 @@ int sell_function()
     cin >> input;
   }
 
-  sell_fish(fish,money);
+  sell_fish(fish, p1);
 
   while (true)
   {
@@ -318,7 +349,7 @@ int sell_function()
     cin >> input_1;
 
     if (input_1=="Y"){
-      sell_fish(fish, money);
+      sell_fish(fish, p1);
     }
 
     if (input_1=="N"){
@@ -331,9 +362,9 @@ int sell_function()
 }
 
 //============= Above are sell_function and its subfunctions ===============//
-int buy_bait(int &money, int &bait)
+int buy_bait(player &p1)
 {
-  cout << "You have " << bait << " baits.";
+  cout << "You have " << p1.bait << " baits.";
   cout << "This is our PRICE LIST:" << endl;
   cout << "1~9 bait: $400/bait" << endl;
   cout << "10~49 bait: $360/bait (10% discount)" << endl;
@@ -351,10 +382,10 @@ int buy_bait(int &money, int &bait)
   else if (input>=50){
     price = 320;
   }
-  if ((input*price)<=money){
-    money=money-input*price;
-    bait+=input;
-    cout << "You got " << input << "bait(s), now you have " << bait << "bait(s)." << endl;
+  if ((input*price)<=p1.money){
+    p1.money=p1.money-input*price;
+    p1.bait+=input;
+    cout << "You got " << input << "bait(s), now you have " << p1.bait << "bait(s)." << endl;
   }
   else{
     cout << "You don't have enough money!" << endl;
@@ -362,6 +393,42 @@ int buy_bait(int &money, int &bait)
   return 0;
 
 }
+// int buy_bait()
+// {
+//   cout << "This is our PRICE LIST:" << endl;
+//   cout << "1 bait: $ 400" << endl;
+//   cout << "3 bait: $ 1000" << endl;
+//   cout << "5 bait: $ 1500" << endl;
+//   cout << "Press 1 to buy 1 bait" << endl;
+//   cout << "Press 3 to buy 3 bait" << endl;
+//   cout << "Press 5 to buy 5 bait" << endl;
+
+//   string input;
+//   cin >> input;
+
+//   if (input=="1"){
+//     update_my_bait();//更新我的鱼饵数量
+//     cout << "You get 1 bait, and it costs you $ 400" << endl;
+//     print_my_bait();//打印出我包里的鱼饵数量
+//     cout << "Welcome your next visit!" << endl;
+//   }
+//   if (input=="3"){
+//     update_my_bait();//更新我的鱼饵数量
+//     cout << "You get 3 bait, and it costs you $ 1000" << endl;
+//     print_my_bait();//打印出我包里的鱼饵数量
+//     cout << "Welcome your next visit!" << endl;
+//   }
+//   if (input=="5"){
+//     update_my_bait();//更新我的鱼饵数量
+//     cout << "You get 5 bait, and it costs you $ 1500" << endl;
+//     print_my_bait();//打印出我包里的鱼饵数量
+//     cout << "Welcome your next visit!" << endl;
+//   }
+
+//   return 0;
+
+// }
+
 
 int buy_function()
 {
@@ -374,7 +441,7 @@ int buy_function()
     cin >> input;
   }
 
-  buy_bait(money, bait);
+  buy_bait(p1);
 
   while (true)
   {
@@ -386,7 +453,7 @@ int buy_function()
     cin >> input_1;
 
     if (input_1=="Y"){
-      buy_bait(money,bait);
+      buy_bait(p1);
     }
 
     if (input_1=="N"){
@@ -399,5 +466,3 @@ int buy_function()
 }
 
 //============= Above are buy_function and its subfunctions ===============//
-
-
