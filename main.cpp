@@ -36,26 +36,6 @@ int main()
   fin.close();
   
   menu();//需要分一下，菜单需要重复进入
-//   cout << "Here you are at the fish pond."<< endl;
-//   cout << "Go fishing: Press 1" << endl;
-//   cout << "Go to the market (sell fish): Press 2"<< endl;
-//   cout << "Go to the market (buy bait): Press 3"<< endl;
-//   cout << "Exit the game: Press 4"<< endl;
-
-//   string input;
-//   cin >> string;
-//   if (string=="1"){
-//     fishing_function();
-//   }
-//   if (string=="2"){
-//     sell_function();
-//   }
-//   if (string=="3"){
-//     buy_function();
-//   }
-//   if (string=="4"){
-//     quit();
-//   }
 
   ofstream fout;
   fout.open(filename);
@@ -118,122 +98,76 @@ void levelcheck(int exp, int &level){
 void get_a_fish(int (&fish)[5], int &exp, int level){
 
   srand((unsigned)time(NULL));
-  int x;
-  x = (rand()%100)+1;
-  if (x>=1 && x<=10){
+  int *i = new int;
+  *i = rand()%100+1;
+  if (*i>=1 && *i<=10){
     cout << "An Octopus!!!" << endl;
     fish[0]+=1;
   }
 
-  if (x>=11 && x<=25){
+  if (*i>=11 && *i<=25){
     cout << "A Salmon!!!" << endl;
     fish[1]+=1;
   }
 
-  if (x>=26 && x<=45){
+  if (*i>=26 && *i<=45){
     cout << "A Cod!!!" << endl;
     fish[2]+=1;
   }
 
-  if (x>=46 && x<=70){
+  if (*i>=46 && *i<=70){
     cout << "A Puffer Fish!!!" << endl;
     fish[3]+=1;
   }
 
-  if (x>=71 && x<=100){
+  if (*i>=71 && *i<=100){
     cout << "A Shell!!!" << endl;
     fish[4]+=1;
   }
+  delete i;
   exp+=10;
   levelcheck(exp, level);
 }
 
-// int get_a_fish(){
-
-//   srand((unsigned)time(NULL));
-//   int x;
-//   x = (rand()%100)+1;
-
-//   if (x>=1 && x<=10){
-//     cout << "A Shell!!!" << endl;
-//     update_my_fish();//将这个鱼添加到我的背包里，一会儿好卖
-//     update_my_experience();//更新经验，增加这种鱼对应的经验值
-//     update_my_level();//更新级别
-//     update_my_rod();//更新钓竿
-//   }
-
-//   if (x>=11 && x<=25){
-//     cout << "A Puffer Fish!!!" << endl;
-//     update_my_fish();//将这个鱼添加到我的背包里，一会儿好卖
-//     update_my_experience();//更新经验，增加这种鱼对应的经验值
-//     update_my_level();//更新级别
-//     update_my_rod();//更新钓竿
-//   }
-
-//   if (x>=26 && x<=45){
-//     cout << "A Cod!!!" << endl;
-//     update_my_fish();//将这个鱼添加到我的背包里，一会儿好卖
-//     update_my_experience();//更新经验，增加这种鱼对应的经验值
-//     update_my_level();//更新级别
-//     update_my_rod();//更新钓竿
-//   }
-
-//   if (x>=46 && x<=70){
-//     cout << "A Salmon!!!" << endl;
-//     update_my_fish();//将这个鱼添加到我的背包里，一会儿好卖
-//     update_my_experience();//更新经验，增加这种鱼对应的经验值
-//     update_my_level();//更新级别
-//     update_my_rod();//更新钓竿
-//   }
-
-//   if (x>=71 && x<=100){
-//     cout << "An Octopus!!!" << endl;
-//     update_my_fish();//将这个鱼添加到我的背包里，一会儿好卖
-//     update_my_experience();//更新经验，增加这种鱼对应的经验值
-//     update_my_level();//更新级别
-//     update_my_rod();//更新钓竿
-//   }
-
-//   return 0;
-// }
-
 int get_rubbish(){
 
   srand((unsigned)time(NULL));
-  int x;
-  x = (rand()%100)+1;
-
-  if (x>=1 && x<=10){
+  int *i = new int;
+  *i = rand()%100+1;
+  if (*i>=1 && *i<=10){
     cout << "A Wooden Stick..." << endl;
   }
 
-  if (x>=11 && x<=25){
+  if (*i>=11 && *i<=25){
     cout << "A Plastic Bottle..." << endl;
   }
 
-  if (x>=26 && x<=45){
+  if (*i>=26 && *i<=45){
     cout << "A Leather Boot..." << endl;
   }
 
-  if (x>=46 && x<=70){
+  if (*i>=46 && *i<=70){
     cout << "A Bone..." << endl;
   }
 
-  if (x>=71 && x<=100){
+  if (*i>=71 && *i<=100){
     cout << "Carrion..." << endl;
   }
-
+  delete i;
   return 0;
 }
 
 bool whether_catch_sth(int level){
   int precent = 40-level*10;
-  int x=rand()%100+1;
-  if (x>=precent){
+  int *i = new int;
+  *i = rand()%100+1;
+  if (*i>=precent){
     return true;
+    delete i;
   }
   else
     return false;
+    delete i;
 }
 
 
@@ -256,16 +190,18 @@ int put_down_the_rod(int &bait)
 
   if (a==true){
     srand((unsigned)time(NULL));
-    int x;
-    x = (rand()%10)+1;
-    if (x<=8){
+    int *i = new int;
+    *i = rand()%10+1;
+
+    if (*i<=8){
       cout << "Congratulations! ";
       get_a_fish(fish, exp, level);
     }
-    if (x>8){
+    if (*i>8){
       cout << "Oops..." << endl;
       get_rubbish();
     }
+    delete i;
   }
 
   return 0;
@@ -425,42 +361,6 @@ int buy_bait(int &money, int &bait)
   return 0;
 
 }
-// int buy_bait()
-// {
-//   cout << "This is our PRICE LIST:" << endl;
-//   cout << "1 bait: $ 400" << endl;
-//   cout << "3 bait: $ 1000" << endl;
-//   cout << "5 bait: $ 1500" << endl;
-//   cout << "Press 1 to buy 1 bait" << endl;
-//   cout << "Press 3 to buy 3 bait" << endl;
-//   cout << "Press 5 to buy 5 bait" << endl;
-
-//   string input;
-//   cin >> input;
-
-//   if (input=="1"){
-//     update_my_bait();//更新我的鱼饵数量
-//     cout << "You get 1 bait, and it costs you $ 400" << endl;
-//     print_my_bait();//打印出我包里的鱼饵数量
-//     cout << "Welcome your next visit!" << endl;
-//   }
-//   if (input=="3"){
-//     update_my_bait();//更新我的鱼饵数量
-//     cout << "You get 3 bait, and it costs you $ 1000" << endl;
-//     print_my_bait();//打印出我包里的鱼饵数量
-//     cout << "Welcome your next visit!" << endl;
-//   }
-//   if (input=="5"){
-//     update_my_bait();//更新我的鱼饵数量
-//     cout << "You get 5 bait, and it costs you $ 1500" << endl;
-//     print_my_bait();//打印出我包里的鱼饵数量
-//     cout << "Welcome your next visit!" << endl;
-//   }
-
-//   return 0;
-
-// }
-
 
 int buy_function()
 {
