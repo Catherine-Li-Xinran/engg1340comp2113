@@ -13,12 +13,12 @@ int menu();
 
 int fish[5], bait, money, exp, level;
 int shell, pufferFish, cod, salmon, octopus;
-
+char filename[100] = "userFile.txt";
 int main()
 {
   //file in
 
-  char filename[100] = "userFile.txt";
+  
   ifstream fin;
   fin.open(filename);
 
