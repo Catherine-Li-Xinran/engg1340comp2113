@@ -302,6 +302,7 @@ int fishing_function()
 
     if (input_1=="N"){
       menu();
+      break;
     }
   }
 
@@ -386,6 +387,7 @@ int sell_function()
 
     if (input_1=="N"){
       menu();
+      break;
     }
   }
 
@@ -489,6 +491,7 @@ int buy_function()
 
     if (input_1=="N"){
       menu();
+      break;
     }
   }
 
