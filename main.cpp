@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <stdlib.h>
 #include <time.h>
 
@@ -10,11 +11,12 @@ int buy_function();
 int quit();
 int menu();
 
-int fish[5]={0,0,0,0,0}, bait = 0, money = 10000, exp = 0, level = 1;//临时初始值，可删
+//int fish[5]={0,0,0,0,0}, bait = 0, money = 10000, exp = 0, level = 1;//临时初始值，可删
 
 int main()
 {
-  int experience, level, rod, money, bait, shell, pufferFish, cod, salmon, octopus;
+  int experience, level, rod, money, bait, 
+  int fish[5];//shell, pufferFish, cod, salmon, octopus;
 
   char filename[100] = "userFile.txt";
   ifstream fin;
@@ -26,7 +28,11 @@ int main()
   }
 
   fin >> experience >> level >> rod >> money >> bait >> shell >> pufferFish >> cod >> salmon >> octopus;
-
+  fish[0]=shell;
+  fish[1]=pufferFish;
+  fish[2]=cod;
+  fish[3]=salmon;
+  fish[4]=octopus;
   fin.close();
   
   menu();//需要分一下，菜单需要重复进入
