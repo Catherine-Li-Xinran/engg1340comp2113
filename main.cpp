@@ -31,7 +31,7 @@ int main()
   fish[0]=octopus;
   fish[1]=salmon;
   fish[2]=cod;
-  fish[3]=pufferfish;
+  fish[3]=pufferFish;
   fish[4]=shell;
   fin.close();
   
