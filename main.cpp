@@ -90,6 +90,20 @@ int menu(){
     buy_function();
   }
 
+  else if (input=="4"){
+    ofstream fout;
+    fout.open(filename);
+
+    if (fout.fail()){
+      cout << "Error in file opening!" << endl;
+      exit(1);
+    }
+
+    fout << exp << " " << level << " " << money << " " << bait << " " <<shell << " " << pufferFish << " " << cod << " " << salmon << " " << octopus;
+
+    fout.close();
+  }
+  
   return 0;
 }
 
