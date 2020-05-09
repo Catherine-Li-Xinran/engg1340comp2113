@@ -43,27 +43,7 @@ int main()
   fish[4]=shell;
   fin.close();
 
-  menu();//需要分一下，菜单需要重复进入
-//   cout << "Here you are at the fish pond."<< endl;
-//   cout << "Go fishing: Press 1" << endl;
-//   cout << "Go to the market (sell fish): Press 2"<< endl;
-//   cout << "Go to the market (buy bait): Press 3"<< endl;
-//   cout << "Exit the game: Press 4"<< endl;
-
-//   string input;
-//   cin >> string;
-//   if (string=="1"){
-//     fishing_function();
-//   }
-//   if (string=="2"){
-//     sell_function();
-//   }
-//   if (string=="3"){
-//     buy_function();
-//   }
-//   if (string=="4"){
-//     quit();
-//   }
+  menu();
 
   ofstream fout;
   fout.open(filename);
@@ -203,7 +183,6 @@ bool whether_catch_sth(player p1){
 }
 
 
-
 int put_down_the_rod(player &p1)
 {
   if (p1.bait <1){
@@ -215,7 +194,7 @@ int put_down_the_rod(player &p1)
   }
 
   bool *a = new bool;
-  *a = whether_catch_sth(p1);//根据钓竿的类型确定，返回true（成功钓上），返回false（什么都没有钓上）
+  *a = whether_catch_sth(p1);
 
   if (*a==false){
     cout << "Sorry, you catch nothing...(Fishing can upgrade your fishing rod!)" << endl;
@@ -251,7 +230,7 @@ int fishing_function()
   }
 
   put_down_the_rod(p1);
-  // update_my_bait();//更新我的鱼饵数量
+  // update_my_bait();//
 
   while (true)
   {
@@ -264,7 +243,7 @@ int fishing_function()
 
     if (input_1=="Y"){
       put_down_the_rod(p1);
-      //update_my_bait();//更新我的鱼饵数量
+      //update_my_bait();//
     }
 
     if (input_1=="N"){
@@ -289,7 +268,7 @@ void print_my_fish(int fish[]){
 
 int sell_fish(int (&fish)[5], player &p1)
 {
-  print_my_fish(fish);//打印出背包里所有的鱼和鱼的数量
+  print_my_fish(fish);//
   cout << "Please tell me what fish you want to sell and the number:" << endl;
   cout << "Press 0 to sell Octopus" << endl;
   cout << "Press 1 to sell Salmon" << endl;
@@ -313,9 +292,6 @@ int sell_fish(int (&fish)[5], player &p1)
   }
   if (input1==4){
     price=1200;
-    // cout << "You got $ 1200 !" << endl;
-    // update_my_money();//更新我背包里的钱
-    // update_my_fish();//更新我背包里剩下的鱼
   }
   if (fish[input1]>=input2){
     fish[input1]=fish[input1]-input2;
@@ -393,41 +369,6 @@ int buy_bait(player &p1)
   return 0;
 
 }
-// int buy_bait()
-// {
-//   cout << "This is our PRICE LIST:" << endl;
-//   cout << "1 bait: $ 400" << endl;
-//   cout << "3 bait: $ 1000" << endl;
-//   cout << "5 bait: $ 1500" << endl;
-//   cout << "Press 1 to buy 1 bait" << endl;
-//   cout << "Press 3 to buy 3 bait" << endl;
-//   cout << "Press 5 to buy 5 bait" << endl;
-
-//   string input;
-//   cin >> input;
-
-//   if (input=="1"){
-//     update_my_bait();//更新我的鱼饵数量
-//     cout << "You get 1 bait, and it costs you $ 400" << endl;
-//     print_my_bait();//打印出我包里的鱼饵数量
-//     cout << "Welcome your next visit!" << endl;
-//   }
-//   if (input=="3"){
-//     update_my_bait();//更新我的鱼饵数量
-//     cout << "You get 3 bait, and it costs you $ 1000" << endl;
-//     print_my_bait();//打印出我包里的鱼饵数量
-//     cout << "Welcome your next visit!" << endl;
-//   }
-//   if (input=="5"){
-//     update_my_bait();//更新我的鱼饵数量
-//     cout << "You get 5 bait, and it costs you $ 1500" << endl;
-//     print_my_bait();//打印出我包里的鱼饵数量
-//     cout << "Welcome your next visit!" << endl;
-//   }
-
-//   return 0;
-
-// }
 
 
 int buy_function()
