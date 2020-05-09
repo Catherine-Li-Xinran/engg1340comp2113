@@ -89,9 +89,6 @@ int menu(){
   if (input=="3"){
     buy_function();
   }
-  if (input=="4"){
-    quit();
-  }
 
   return 0;
 }
@@ -345,6 +342,7 @@ int sell_fish(int (&fish)[5], int &money)
   }
   else
   cout << "You don't have enough fish!";
+  return 0;
 }
 
 int sell_function()
